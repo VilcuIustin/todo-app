@@ -1,0 +1,55 @@
+<div class="flex flex-col">
+  <span class="text-xl font-semibold text-center">Listele tale</span>
+  <div class="flex flex-row justify-center">
+    <button
+      mat-flat-button
+      [color]="'primary'"
+      (click)="addNote()"
+      class="mt-4"
+    >
+      Adauga Lista
+    </button>
+  </div>
+
+  @if(notes.length == 0){
+  <div class="flex flex-col justify-center items-center mt-4">
+    <span class="text-lg">Nu ai nicio lista de afisat</span>
+  </div>
+  } @else {
+  <div class="flex flex-col items-center">
+    @for (note of notes; track $index) {
+    <div class="flex flex-col w-3/5 shadow-lg mt-4 p-4">
+      <div class="mb-4 flex flex-row justify-between">
+        <span class="text-lg ms-4 font-semibold">{{
+          (note.title === "" || note.title === null
+            ? "Fara titlu adaugat"
+            : note.title
+          ) | capitalize
+        }}</span>
+        <div>
+          <button
+            mat-button
+            color="primary"
+            (click)="modify(note)"
+            class="ms-4"
+          >
+            Modifica
+          </button>
+
+          <button
+            mat-button
+            color="warn"
+            (click)="deleteNote(note.id)"
+            class="ms-4"
+          >
+            Sterge
+          </button>
+        </div>
+      </div>
+
+      <span class="ms-6">{{ note.description }}</span>
+    </div>
+    }
+  </div>
+  }
+</div>
